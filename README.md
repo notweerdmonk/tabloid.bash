@@ -5,7 +5,7 @@ A bash implementation[^1] of [Tabloid](https://github.com/thesephist/tabloid), t
 ---
 
 ```console
-$ ./runtabloid prog
+$ ./runtabloid programs/prog
 Program
 EXPERTS CLAIM a TO BE 10
 EXPERTS CLAIM b TO BE 100
@@ -16,7 +16,7 @@ PLEASE LIKE AND SUBSCRIBE
 Output
 110
 
-$ time ./runtabloid fibo
+$ time ./runtabloid programs/fibo
 Program
 DISCOVER HOW TO fibonacci WITH n
 RUMOR HAS IT
@@ -42,7 +42,7 @@ real    0m27.589s
 user    0m22.252s
 sys     0m6.022s
 $
-$ time ./runtabloid fibo2
+$ time ./runtabloid programs/fibo2
 Program
 DISCOVER HOW TO fibonacci WITH n
 RUMOR HAS IT
