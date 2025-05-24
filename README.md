@@ -1,8 +1,8 @@
 # tabloid.bash
 
----
-
 A bash implementation[^1] of [Tabloid](https://github.com/thesephist/tabloid), the clickbait programming language.
+
+---
 
 ```console
 $ ./runtabloid prog
