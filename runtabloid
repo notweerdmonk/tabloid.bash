@@ -1,0 +1,18 @@
+if [[ -z "$1" ]]; then
+  echo "Provide program file"
+  exit 1
+fi
+source ./lang.bash
+progfile="$1"
+
+echo "Program"
+cat "${progfile}"
+
+echo -e "\nOutput"
+
+eval "$(tokenize "$(cat "$progfile")")"
+parser_start tokens
+out="$(parser_parse)"
+env_run "$out"
+
+rm "$(get_context_store)"
