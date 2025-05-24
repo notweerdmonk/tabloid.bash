@@ -15,5 +15,7 @@ jobs:
 
     - name: basic program test
       run: |
-        [[ "$(./runtabloid prog 2>&1 | awk '/Output/{getline;print}')" -eq 110 ]]
+        [[ "$(./runtabloid prog 2>&1 | awk '/Output/{getline;print}')" -eq 110 ]] &&
+        [[ "$(./runtabloid fibo 2>&1 | awk '/Output/{getline;getline;print}')" -eq 3 ]] &&
+        [[ "$(./runtabloid fibo2 2>&1 | awk '/Output/{getline;getline;print}')" -eq 3 ]]
 
