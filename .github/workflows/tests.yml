@@ -1,0 +1,19 @@
+name: tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: basic program test
+      run: |
+        [[ "$(./runtabloid prog 2>&1 | awk '/Output/{getline;print}')" -eq 110 ]]
+
