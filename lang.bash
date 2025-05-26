@@ -1446,7 +1446,7 @@ function parser_atom2() {
 
     declare -A expr=(
       [type]="${N[ExprGroup]}"
-      [val]="$(declare -p exprs)"
+      [exprs]="$(declare -p exprs)"
     )
 
     declare -A ret=(
@@ -3088,7 +3088,7 @@ function parser_atom() {
 
     declare -A expr=(
       [type]="${N[ExprGroup]}"
-      [val]="$(declare -p exprs)"
+      [exprs]="$(declare -p exprs)"
     )
     declare -p expr
     return 0
