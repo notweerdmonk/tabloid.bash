@@ -16,6 +16,19 @@ PLEASE LIKE AND SUBSCRIBE
 Output
 110
 
+$
+$ time ./runtabloid programs/oneline
+Program
+RUMOR HAS IT THAT EXPERTS CLAIM a TO BE 10. EXPERTS CLAIM b TO BE 100. YOU WON'T WANT TO MISS ((a PLUS b) TIMES 10). END OF STORY. PLEASE LIKE AND SUBSCRIBE
+
+Output
+1100
+
+
+real    0m5.559s
+user    0m4.287s
+sys     0m1.430s
+$
 $ time ./runtabloid programs/fibo
 Program
 DISCOVER HOW TO fibonacci WITH n
