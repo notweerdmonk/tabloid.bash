@@ -170,6 +170,7 @@ declare -Ax T=(
   [IsActually]="#TIsActually"
   [And]="#TAnd"
   [Or]="#TOr"
+  [Period]="#TPeriod"
   [Plus]="#TPlus"
   [Minus]="#TMinus"
   [Times]="#TTimes"
@@ -235,6 +236,7 @@ function create_symbol_T() {
     [CompletelyWrong]="#TCompletelyWrong"
     [IsActually]="#TIsActually"
     [And]="#TAnd"
+    [Period]="#TPeriod"
     [Or]="#TOr"
     [Plus]="#TPlus"
     [Minus]="#TMinus"
@@ -892,7 +894,7 @@ function wordifier_wordify2() {
     if [[ -z "$tok" ]]; then
       return 1 # true condition, ws found
     fi
-    if [[ "$tok" =~ ^[(),] ]]; then
+    if [[ "$tok" =~ ^[(),.] ]]; then
       return 1 # true condition, ('(', ')', ',') found
     fi
     # return false condition
@@ -919,6 +921,9 @@ function wordifier_wordify2() {
         ;;
       ")")
         wordifier_tokens+=(")")
+        ;;
+      ".")
+        wordifier_tokens+=(".")
         ;;
       ",")
         wordifier_tokens+=(",")
@@ -1188,6 +1193,9 @@ function tokenize2() {
         ;;
       ")")
         tokens+=(${T[RParen]})
+        ;;
+      ".")
+        tokens+=(${T[Period]})
         ;;
       ",")
         tokens+=(${T[Comma]})
@@ -1678,6 +1686,16 @@ function parser_expr2() {
     declare -p ret
     return 0
   
+  elif [[ "$next" == "${T[Period]}" ]]; then
+    local val="${ret[val]}"
+    unset ret
+    declare -A ret=(
+      [val]="${val}"
+      [ctx]="${__ctxdata}"
+    )
+    declare -p ret
+
+    return 0
   fi
 
   call2 ctxdata reader_backstep2 1>/dev/null
@@ -2663,7 +2681,7 @@ function wordifier_wordify() {
     if [[ -z "$tok" ]]; then
       return 1 # true condition, ws found
     fi
-    if [[ "$tok" =~ ^[(),] ]]; then
+    if [[ "$tok" =~ ^[(),.] ]]; then
       return 1 # true condition, ('(', ')', ',') found
     fi
     # return false condition
@@ -2683,6 +2701,9 @@ function wordifier_wordify() {
         ;;
       ")")
         wordifier_tokens+=(")")
+        ;;
+      ".")
+        wordifier_tokens+=(".")
         ;;
       ",")
         wordifier_tokens+=(",")
@@ -2929,6 +2950,9 @@ function tokenize() {
         ;;
       ")")
         tokens+=(${T[RParen]})
+        ;;
+      ".")
+        tokens+=(${T[Period]})
         ;;
       ",")
         tokens+=(${T[Comma]})
@@ -3250,6 +3274,14 @@ function parser_expr() {
     declare -p expr
     return 0
   
+  elif [[ "$next" == "${T[Period]}" ]]; then
+    declare -A expr
+    for key in "${!atom[@]}"; do
+      expr[$key]=${atom[$key]}
+    done
+
+    declare -p expr
+    return 0
   fi
 
   reader_backstep
